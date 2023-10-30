@@ -5,6 +5,16 @@ public class ApiResponse {
     private int statusCode;
     private String responseBody;
 
+    public ApiError getApiError() {
+        return apiError;
+    }
+
+    public void setApiError(ApiError apiError) {
+        this.apiError = apiError;
+    }
+
+    private ApiError apiError;
+
     public String getServiceCode() {
         return serviceCode;
     }
