@@ -2,10 +2,12 @@ package com.company;
 
 public class Api {
     private String serviceCode;
+    private String ApiUrl;
     private String appKey;
     private String requestTime;
     private String sign;
     private String data;
+
 
     public String getServiceCode() {
         return serviceCode;
@@ -45,6 +47,14 @@ public class Api {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getApiUrl() {
+        return ApiUrl;
+    }
+
+    public void setApiUrl(String apiUrl) {
+        ApiUrl = apiUrl;
     }
 
     // getters and setters

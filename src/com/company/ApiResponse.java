@@ -1,37 +1,32 @@
 package com.company;
 
 public class ApiResponse {
-    private String executeResult;
-    private String errorCode;
-    private String errorMessage;
-    private String data;
+    private String serviceCode;
+    private int statusCode;
+    private String responseBody;
 
-    public String getExecuteResult() {
-        return "Error";
+    public String getServiceCode() {
+        return serviceCode;
     }
 
-    public String getErrorCode() {
-        return "This is error code";
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
-    public String getErrorMessage() {
-        return "This is error Message";
+    public int getStatusCode() {
+        return statusCode;
     }
 
-    public void setExecuteResult(String executeResult) {
-        this.executeResult = executeResult;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public String getResponseBody() {
+        return responseBody;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public void setData(String data) {
-        this.data = data;
+    public void setResponseBody(String responseBody) {
+        this.responseBody = responseBody;
     }
 
     // getters and setters
