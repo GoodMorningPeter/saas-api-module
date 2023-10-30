@@ -33,5 +33,7 @@ public interface ApiInvoker {
 //
 //        return apiResponse;
 //    }
+
+    boolean validateUser(ApiRequest apiRequest);
     ApiResponse invokeApi(ApiRequest apiRequest) throws IOException, InterruptedException;
 }

@@ -16,6 +16,11 @@ public class HttpClientApiInvoker implements ApiInvoker {
         this.apiManager = apiManager;
     }
 
+    @Override
+    public boolean validateUser(ApiRequest apiRequest) {
+        return false;
+    }
+
     public ApiResponse invokeApi(ApiRequest apiRequest) throws IOException, InterruptedException {
         Api apiDefinition = apiManager.getApi(apiRequest.getServiceCode());
         HttpRequest httpRequest = HttpRequest.newBuilder()

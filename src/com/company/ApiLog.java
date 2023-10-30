@@ -8,11 +8,16 @@ public class ApiLog {
 
     // getters and setters...
 
+    public ApiLog() {
+
+    }
+
     public ApiLog(String serviceCode, String result) {
         this.timestamp = LocalDateTime.now();
         this.serviceCode = serviceCode;
         this.result = result;
     }
+
 
     public LocalDateTime getTimestamp() {
         return timestamp;

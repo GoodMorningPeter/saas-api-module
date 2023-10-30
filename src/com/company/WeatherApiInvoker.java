@@ -11,6 +11,15 @@ public class WeatherApiInvoker implements ApiInvoker {
         this.apiManager = apiManager;
     }
 
+    @Override
+    public boolean validateUser(ApiRequest apiRequest) {
+        ApiUser apiUser = apiRequest.getApiUser();
+        // 添加用户验证和权限检查逻辑
+        // 如果用户验证通过并且用户有权限调用API，返回true
+        // 否则，返回false
+        return true;
+    }
+
     public ApiResponse invokeApi(ApiRequest apiRequest) {
         ApiResponse apiResponse = new ApiResponse();
         try{
