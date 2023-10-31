@@ -2,7 +2,15 @@ package com.company;
 
 import java.io.IOException;
 
+
 public class Main {
+    public static Api ApiSetUp(String urlString, String ServiceCode){
+        Api weatherApi = new Api();
+        weatherApi.setServiceCode(ServiceCode);
+        weatherApi.setApiUrl(urlString);
+        return weatherApi;
+    }
+
 
     public static void main(String[] args) throws IOException, InterruptedException {
 	// write your code here
@@ -20,15 +28,17 @@ public class Main {
 //        errorHandler.logApiCall(apiRequest, apiResponse);
 
         ApiManager apiManager = new MemoryApiManager();
-        Api weatherApi = new Api();
-        weatherApi.setServiceCode("weather");
-        weatherApi.setApiUrl("http://t.weather.itboy.net/api/weather/city/101250601");
-        apiManager.registApi(weatherApi);
 
+        // Register WeatherApi
+        Api weatherApi = ApiSetUp("http://t.weather.itboy.net/api/weather/city/101250601", "weather");
+        apiManager.registApi(weatherApi);
+        // Invoke WeatherAPi and get Response
         ApiInvoker weatherApiInvoker = new WeatherApiInvoker(apiManager);
         ApiRequest apiRequest = new ApiRequest();
         apiRequest.setServiceCode("weather");
         ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest);
         System.out.println(apiResponse.getResponseBody());
+
+        // Register LocationApi
     }
 }
