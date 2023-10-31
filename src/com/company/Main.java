@@ -31,7 +31,7 @@ public class Main {
 
         // Register WeatherApi
         Api weatherApi = ApiSetUp("http://t.weather.itboy.net/api/weather/city/101250601", "weather");
-        apiManager.registApi(weatherApi);
+        apiManager.registerApi(weatherApi);
         // Invoke WeatherAPi and get Response
         ApiInvoker weatherApiInvoker = new WeatherApiInvoker(apiManager);
         ApiRequest apiRequest = new ApiRequest();

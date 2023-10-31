@@ -8,7 +8,7 @@ import java.util.Map;
 public class MemoryApiManager implements ApiManager {
     private Map<String, Api> apiMap = new HashMap<>();
 
-    public void registApi(Api api) {
+    public void registerApi(Api api) {
         apiMap.put(api.getServiceCode(), api);
     }
 

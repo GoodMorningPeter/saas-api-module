@@ -4,6 +4,7 @@ public class ApiResponse {
     private String serviceCode;
     private int statusCode;
     private String responseBody;
+    private ApiError apiError;
 
     public ApiError getApiError() {
         return apiError;
@@ -13,7 +14,6 @@ public class ApiResponse {
         this.apiError = apiError;
     }
 
-    private ApiError apiError;
 
     public String getServiceCode() {
         return serviceCode;
