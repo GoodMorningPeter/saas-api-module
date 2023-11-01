@@ -3,6 +3,7 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.LocalDateTime;
 
 public class WeatherApiInvoker implements ApiInvoker {
     private ApiManager apiManager;
@@ -20,8 +21,10 @@ public class WeatherApiInvoker implements ApiInvoker {
         return true;
     }
 
-    public ApiResponse invokeApi(ApiRequest apiRequest) {
+    public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) {
+        long start = System.currentTimeMillis();
         ApiResponse apiResponse = new ApiResponse();
+        String errorMessage = null;
         try{
             Api apiDefinition = apiManager.getApi(apiRequest.getServiceCode());
             URL url = new URL(apiDefinition.getApiUrl());
@@ -42,12 +45,16 @@ public class WeatherApiInvoker implements ApiInvoker {
             isReader.close();
 
             apiResponse.setResponseBody(response.toString());
-        }
-        catch(Exception exp){
-            ApiError apiError = new ApiError();
-            apiError.setServiceCode(apiRequest.getServiceCode());
-            apiError.setErrorMessage(exp.getMessage());
-            apiResponse.setApiError(apiError);
+        } catch (Exception exp) {
+            ApiError error = new ApiError();
+            error.setMessage(exp.getMessage());
+            error.setDetails(exp.toString());
+            error.setTimestamp(LocalDateTime.now());
+            apiResponse.setError(error);
+        } finally {
+            long duration = System.currentTimeMillis() - start;
+            logger.logApiCall(apiRequest, apiResponse, duration);
+            logger.updateApiUsageStats(apiRequest.getServiceCode());
         }
         return apiResponse;
     }

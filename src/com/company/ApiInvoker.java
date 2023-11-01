@@ -35,5 +35,5 @@ public interface ApiInvoker {
 //    }
 
     boolean validateUser(ApiRequest apiRequest);
-    ApiResponse invokeApi(ApiRequest apiRequest) throws IOException, InterruptedException;
+    ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) throws IOException, InterruptedException;
 }

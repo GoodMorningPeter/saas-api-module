@@ -1,6 +1,9 @@
 package com.company;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 public class Main {
@@ -12,8 +15,12 @@ public class Main {
     }
 
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        
+    public static void main(String[] args) throws IOException, InterruptedException, SQLException {
+
+//        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/api", "morning", "123456");
+//        ApiLogger logger = new DatabaseApiLogger(connection);
+        ApiLogger logger = new DatabaseApiLogger(null);
+
         ApiManager apiManager = new MemoryApiManager();
 
         // Register WeatherApi
@@ -23,7 +30,7 @@ public class Main {
         ApiInvoker weatherApiInvoker = new WeatherApiInvoker(apiManager);
         ApiRequest apiRequest = new ApiRequest();
         apiRequest.setServiceCode("weather");
-        ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest);
+        ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest, logger);
         System.out.println(apiResponse.getResponseBody());
 
         // Register LocationApi

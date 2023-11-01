@@ -4,16 +4,7 @@ public class ApiResponse {
     private String serviceCode;
     private int statusCode;
     private String responseBody;
-    private ApiError apiError;
-
-    public ApiError getApiError() {
-        return apiError;
-    }
-
-    public void setApiError(ApiError apiError) {
-        this.apiError = apiError;
-    }
-
+    private ApiError error;
 
     public String getServiceCode() {
         return serviceCode;
@@ -38,6 +29,15 @@ public class ApiResponse {
     public void setResponseBody(String responseBody) {
         this.responseBody = responseBody;
     }
+
+    public ApiError getError() {
+        return error;
+    }
+
+    public void setError(ApiError error) {
+        this.error = error;
+    }
+
 
     // getters and setters
     // ...

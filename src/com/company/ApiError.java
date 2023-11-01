@@ -1,23 +1,35 @@
 package com.company;
 
+import java.time.LocalDateTime;
+
 public class ApiError {
-    private String serviceCode;
-    private String errorMessage;
+    private String message;
+    private String details;
+    private LocalDateTime timestamp;
 
-    public String getServiceCode() {
-        return serviceCode;
+    public String getMessage() {
+        return message;
     }
 
-    public void setServiceCode(String serviceCode) {
-        this.serviceCode = serviceCode;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getDetails() {
+        return details;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setDetails(String details) {
+        this.details = details;
     }
-    // getters and setters
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    // getter and setter methods...
 }

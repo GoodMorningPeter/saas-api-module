@@ -1,6 +1,7 @@
 package com.company;
 
 public interface ApiLogger {
-    void logApiCall(ApiRequest apiRequest, ApiResponse apiResponse);
+    void logApiCall(ApiRequest apiRequest, ApiResponse apiResponse, long duration);
+    void updateApiUsageStats(String apiId);
 }
 

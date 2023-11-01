@@ -2,7 +2,7 @@ package com.company;
 
 public class ConsoleApiErrorHandler implements ApiErrorHandler {
     public void handleApiError(ApiError apiError) {
-        System.err.println("API error: " + apiError.getErrorMessage());
+        System.err.println("API error: " + apiError.getMessage());
     }
 
     public void logApiCall(ApiRequest apiRequest, ApiResponse apiResponse) {
