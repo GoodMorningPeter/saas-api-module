@@ -20,11 +20,11 @@ public class MainLocation {
      */
     private static String SUCCESS_FLAG="1";
 
-    /**
-     * 根据地址获取对应的经纬度信息
-     * @param address
-     * @return
-     */
+//    /**
+//     * 根据地址获取对应的经纬度信息
+//     * @param address
+//     * @return
+//     */
     public static String getIpAddress() {
         try {
             Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
@@ -108,6 +108,7 @@ public class MainLocation {
 
     public static void main(String[] args) {
         String IP = getIpAddress();
+        System.out.println(IP);
         String address = getLocationAddress(IP);
         String location=getLonAndLatByAddress(address);// output: 经纬度
         System.out.println("经纬度：" + location);
