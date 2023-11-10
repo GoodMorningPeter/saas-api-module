@@ -1,18 +1,30 @@
 package com.company.entity;
 
 public class CallLog {
-    private String id;
+    private Integer id;
     private String api_id;
     private String caller;
     private String call_time;
     private String duration;
     private String error_message;
 
-    public String getId() {
+    public CallLog(Integer id, String api_id, String caller, String call_time, String duration, String error_message) {
+        this.id = id;
+        this.api_id = api_id;
+        this.caller = caller;
+        this.call_time = call_time;
+        this.duration = duration;
+        this.error_message = error_message;
+    }
+
+    public CallLog() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,15 +65,6 @@ public class CallLog {
     }
 
     public void setError_message(String error_message) {
-        this.error_message = error_message;
-    }
-
-    public CallLog(String id, String api_id, String caller, String call_time, String duration, String error_message) {
-        this.id = id;
-        this.api_id = api_id;
-        this.caller = caller;
-        this.call_time = call_time;
-        this.duration = duration;
         this.error_message = error_message;
     }
 }

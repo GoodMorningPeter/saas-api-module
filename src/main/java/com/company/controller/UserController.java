@@ -24,18 +24,17 @@ public class UserController {
 
 
     @GetMapping("/apiInfo")
-    public List<UsageStats> getApiInfo(String apiId){
+    public List<UsageStats> getApiInfo(Integer id){
         List<UsageStats> all = usageStatsService.findAll();
-        List<UsageStats> collect = all.stream().filter(log -> log.getApi_id().equals(apiId)).collect(Collectors.toList());
+        List<UsageStats> collect = all.stream().filter(log -> log.getId().equals(id)).collect(Collectors.toList());
         return collect;
     }
 
 
     @GetMapping("/apiDetail")
-    public List<CallLog> getApiDetail(String apiId){
+    public List<CallLog> getApiDetail(Integer id){
         List<CallLog> all = callLogService.findAll();
-        List<CallLog> collect = all.stream().filter(log -> log.getApi_id().equals(apiId)).collect(Collectors.toList());
+        List<CallLog> collect = all.stream().filter(log -> log.getId().equals(id)).collect(Collectors.toList());
         return collect;
     }
-
 }
