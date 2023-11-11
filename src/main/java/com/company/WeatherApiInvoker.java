@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.entity.Api;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;

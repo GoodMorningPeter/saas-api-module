@@ -2,15 +2,16 @@ package com.company.entity;
 
 public class CallLog {
     private Integer id;
-    private String api_id;
+    private String description;
     private String caller;
     private String call_time;
     private String duration;
     private String error_message;
 
-    public CallLog(Integer id, String api_id, String caller, String call_time, String duration, String error_message) {
+
+    public CallLog(Integer id, String description, String caller, String call_time, String duration, String error_message) {
         this.id = id;
-        this.api_id = api_id;
+        this.description = description;
         this.caller = caller;
         this.call_time = call_time;
         this.duration = duration;
@@ -28,12 +29,12 @@ public class CallLog {
         this.id = id;
     }
 
-    public String getApi_id() {
-        return api_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setApi_id(String api_id) {
-        this.api_id = api_id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCaller() {

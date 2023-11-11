@@ -1,6 +1,7 @@
 package com.company;
 
-import java.util.Map;
+import com.company.entity.Api;
+
 import java.sql.Timestamp;
 
 public class ApiRequest {

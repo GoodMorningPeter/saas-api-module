@@ -1,12 +1,10 @@
 package com.company;
 
+import com.company.entity.Api;
+
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.sql.Timestamp;
 
 public class Main {

@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.Api;
-import com.company.ApiManager;
+import com.company.entity.Api;
+
 import java.util.HashMap;
 import java.util.Map;
 
