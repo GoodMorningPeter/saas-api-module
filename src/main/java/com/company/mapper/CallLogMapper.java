@@ -7,4 +7,5 @@ import java.util.List;
 @Mapper
 public interface CallLogMapper {
     List<CallLog> findAll();
+    boolean insertLog(CallLog calllog);
 }

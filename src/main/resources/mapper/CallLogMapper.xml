@@ -4,4 +4,16 @@
     <select id="findAll" resultType="com.company.entity.CallLog">
         SELECT * FROM api_call_log
     </select>
+
+    <insert id="insertLog"
+            parameterType="com.company.entity.CallLog"
+            flushCache="true"
+            statementType="PREPARED"
+            keyProperty=""
+            keyColumn=""
+            useGeneratedKeys="true"
+            timeout="20">
+        insert into api_call_log (id, api_id, caller, call_time, duration, error_message)
+        values (#{id}, #{api_id}, #{caller}, #{call_time}, #{duration}, #{error_message})
+    </insert>
 </mapper>

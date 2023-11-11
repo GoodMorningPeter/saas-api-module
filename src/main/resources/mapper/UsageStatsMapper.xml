@@ -4,4 +4,10 @@
     <select id="findAll" resultType="com.company.entity.UsageStats">
         SELECT * FROM api_usage_stats
     </select>
+    <update id="updateStats"
+            parameterType="com.company.entity.UsageStats">
+        update api_usage_stats
+        set call_count = #{call_count} + 1
+        where api_id = #{api_id}
+    </update>
 </mapper>
