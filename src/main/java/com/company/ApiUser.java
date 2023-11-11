@@ -7,6 +7,20 @@ public class ApiUser {
     private String password;
     private List<String> permissions;
 
+    public ApiUser(String username, String password, List<String> permissions) {
+        this.username = username;
+        this.password = password;
+        this.permissions = permissions;
+    }
+
+    public ApiUser() {
+    }
+
+    public ApiUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }

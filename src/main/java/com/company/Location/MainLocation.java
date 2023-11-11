@@ -10,10 +10,10 @@ public class MainLocation {
     /**
      * Key
      */
-    private static String KEY="1137f7d2f7a524537f4bd8f10c87ac2d";
+    private static String KEY = "1137f7d2f7a524537f4bd8f10c87ac2d";
 
     public static String Location_URL = "https://restapi.amap.com/v3/ip?ip=%s&key=%s";
-    public  static String GD_URL="https://restapi.amap.com/v3/geocode/geo?address=%s&key=%s";
+    public static String GD_URL = "https://restapi.amap.com/v3/geocode/geo?address=%s&key=%s";
 
     /**
      * 成功标识

@@ -1,20 +1,53 @@
 package com.company;
 
 public class Api {
-    private String serviceCode;
+    private Integer id;
+    private String ApiDescription;
     private String ApiUrl;
+    private String appUser;
     private String appKey;
-    private String requestTime;
-    private String sign;
-    private String data;
 
-
-    public String getServiceCode() {
-        return serviceCode;
+    public Api(Integer id, String apiDescription, String apiUrl, String appUser, String appKey) {
+        this.id = id;
+        ApiDescription = apiDescription;
+        ApiUrl = apiUrl;
+        this.appUser = appUser;
+        this.appKey = appKey;
     }
 
-    public void setServiceCode(String serviceCode) {
-        this.serviceCode = serviceCode;
+    public Api() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getApiDescription() {
+        return ApiDescription;
+    }
+
+    public void setApiDescription(String apiDescription) {
+        ApiDescription = apiDescription;
+    }
+
+    public String getApiUrl() {
+        return ApiUrl;
+    }
+
+    public void setApiUrl(String apiUrl) {
+        ApiUrl = apiUrl;
+    }
+
+    public String getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(String appUser) {
+        this.appUser = appUser;
     }
 
     public String getAppKey() {
@@ -25,37 +58,6 @@ public class Api {
         this.appKey = appKey;
     }
 
-    public String getRequestTime() {
-        return requestTime;
-    }
-
-    public void setRequestTime(String requestTime) {
-        this.requestTime = requestTime;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getApiUrl() {
-        return ApiUrl;
-    }
-
-    public void setApiUrl(String apiUrl) {
-        ApiUrl = apiUrl;
-    }
 
     // getters and setters
     // ...

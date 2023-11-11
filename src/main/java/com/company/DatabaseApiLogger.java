@@ -29,7 +29,7 @@ public class DatabaseApiLogger implements ApiLogger {
 //        }
     }
 
-    public void updateApiUsageStats(String apiId) {
+    public void updateApiUsageStats(Integer apiId) {
 //        String sql = "INSERT INTO api_usage_stats (api_id, call_count) VALUES (?, 1) ON DUPLICATE KEY UPDATE call_count = call_count + 1";
 //        try {
 //            PreparedStatement statement = connection.prepareStatement(sql);

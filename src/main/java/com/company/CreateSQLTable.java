@@ -16,7 +16,7 @@ public class CreateSQLTable {
 
             String createApiCallLogTable = "CREATE TABLE api_call_log (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY," +
-                    "api_id VARCHAR(255)," +
+                    "description VARCHAR(255)," +
                     "caller VARCHAR(255)," +
                     "call_time TIMESTAMP," +
                     "duration INT," +
@@ -25,7 +25,7 @@ public class CreateSQLTable {
 
             String createApiUsageStatsTable = "CREATE TABLE api_usage_stats (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY," +
-                    "api_id VARCHAR(255)," +
+                    "description VARCHAR(255)," +
                     "call_count INT" +
                     ")";
 

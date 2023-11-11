@@ -26,7 +26,7 @@ public class WeatherApiInvoker implements ApiInvoker {
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
         try{
-            Api apiDefinition = apiManager.getApi(apiRequest.getServiceCode());
+            Api apiDefinition = apiManager.getApi(apiRequest.getApi().getId());
             URL url = new URL(apiDefinition.getApiUrl());
             InputStreamReader isReader =  new InputStreamReader(url.openStream(),"UTF-8");
             BufferedReader br = new BufferedReader(isReader);
@@ -43,7 +43,6 @@ public class WeatherApiInvoker implements ApiInvoker {
             }
             br.close();
             isReader.close();
-
             apiResponse.setResponseBody(response.toString());
         } catch (Exception exp) {
             ApiError error = new ApiError();
@@ -54,7 +53,7 @@ public class WeatherApiInvoker implements ApiInvoker {
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);
-            logger.updateApiUsageStats(apiRequest.getServiceCode());
+            logger.updateApiUsageStats(apiRequest.getApi().getId());
         }
         return apiResponse;
     }

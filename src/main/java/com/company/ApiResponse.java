@@ -1,24 +1,34 @@
 package com.company;
 
 public class ApiResponse {
-    private String serviceCode;
-    private int statusCode;
+    private Integer id;  //Api的id
+    private Integer statusCode;
     private String responseBody;
     private ApiError error;
 
-    public String getServiceCode() {
-        return serviceCode;
+    public ApiResponse(Integer id, Integer statusCode, String responseBody, ApiError error) {
+        this.id = id;
+        this.statusCode = statusCode;
+        this.responseBody = responseBody;
+        this.error = error;
     }
 
-    public void setServiceCode(String serviceCode) {
-        this.serviceCode = serviceCode;
+    public ApiResponse() {
     }
 
-    public int getStatusCode() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getStatusCode() {
         return statusCode;
     }
 
-    public void setStatusCode(int statusCode) {
+    public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
     }
 
@@ -38,8 +48,6 @@ public class ApiResponse {
         this.error = error;
     }
 
-
-    // getters and setters
     // ...
 
 }

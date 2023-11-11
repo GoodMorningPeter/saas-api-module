@@ -6,21 +6,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemoryApiManager implements ApiManager {
-    private Map<String, Api> apiMap = new HashMap<>();
+    private Map<Integer, Api> apiMap = new HashMap<>();
 
     public void registerApi(Api api) {
-        apiMap.put(api.getServiceCode(), api);
+        apiMap.put(api.getId(), api);
     }
 
-    public void updateApi(String apiId, Api api) {
+    public void updateApi(Integer apiId, Api api) {
         apiMap.put(apiId, api);
     }
 
-    public void deleteApi(String apiId) {
+    public void deleteApi(Integer apiId) {
         apiMap.remove(apiId);
     }
 
-    public Api getApi(String apiId) {
+    public Api getApi(Integer apiId) {
         return apiMap.get(apiId);
     }
 }

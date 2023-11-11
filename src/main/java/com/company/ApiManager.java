@@ -5,12 +5,12 @@ import java.util.Map;
 import com.company.Api;
 
 public interface ApiManager {
-    Map<String, Api> apiMap = new HashMap<>();
+    Map<Integer, Api> apiMap = new HashMap<>();
 
     void registerApi(Api api);
-    Api getApi(String serviceCode);
-    void updateApi(String serviceCode, Api newApi);
-    void deleteApi(String serviceCode);
+    Api getApi(Integer id);
+    void updateApi(Integer id, Api newApi);
+    void deleteApi(Integer id);
 }
 
 

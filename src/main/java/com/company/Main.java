@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.sql.Timestamp;
 
 public class Main {
-    public static Api ApiSetUp(String urlString, String ServiceCode){
+    public static Integer totalApiCount = 0;
+    public static Api ApiSetUp(Integer id, String urlString, String ApiDescription){
         Api weatherApi = new Api();
-        weatherApi.setServiceCode(ServiceCode);
+        weatherApi.setId(id);
+        weatherApi.setApiDescription(ApiDescription);
         weatherApi.setApiUrl(urlString);
         return weatherApi;
     }
@@ -24,12 +29,20 @@ public class Main {
         ApiManager apiManager = new MemoryApiManager();
 
         // Register WeatherApi
-        Api weatherApi = ApiSetUp("http://t.weather.itboy.net/api/weather/city/101250601", "weather");
+        Api weatherApi = ApiSetUp(++totalApiCount,"http://t.weather.itboy.net/api/weather/city/101250601", "weather");
         apiManager.registerApi(weatherApi);
         // Invoke WeatherAPi and get Response
         ApiInvoker weatherApiInvoker = new WeatherApiInvoker(apiManager);
+
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(now);
+
         ApiRequest apiRequest = new ApiRequest();
-        apiRequest.setServiceCode("weather");
+        apiRequest.setApi(weatherApi);
+        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest.setTimestamp(timestamp);
+        apiRequest.setStatus(0);
+
         ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest, logger);
         System.out.println(apiResponse.getResponseBody());
 
