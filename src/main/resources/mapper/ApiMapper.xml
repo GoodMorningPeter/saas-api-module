@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.mapper.ApiMapper">
+
+    <select id="findAll" resultType="com.company.entity.Api">
+        SELECT * FROM api
+    </select>
+
+    <insert id="addApi" parameterType="com.company.entity.Api">
+        INSERT INTO api(ApiDescription, ApiUrl, appUser, appKey)
+        VALUES (#{ApiDescription}, #{ApiUrl}, #{appUser}, #{appKey})
+    </insert>
+
+    <update id="updateApi" parameterType="com.company.entity.Api">
+        UPDATE api SET ApiDescription=#{ApiDescription}, ApiUrl=#{ApiUrl}, appUser=#{appUser}, appKey=#{appKey} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteApi" parameterType="integer">
+        DELETE FROM api WHERE id=#{id}
+    </delete>
+
+</mapper>

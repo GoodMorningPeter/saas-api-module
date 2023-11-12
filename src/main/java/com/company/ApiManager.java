@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.company.Api;
+import com.company.entity.Api;
 
 public interface ApiManager {
     Map<Integer, Api> apiMap = new HashMap<>();
