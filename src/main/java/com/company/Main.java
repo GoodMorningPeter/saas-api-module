@@ -22,7 +22,7 @@ public class Main {
 
 //        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/api", "morning", "123456");
 //        ApiLogger logger = new DatabaseApiLogger(connection);
-        ApiLogger logger = new DatabaseApiLogger(null);
+        ApiLogger logger = new DatabaseApiLogger();
 
         ApiManager apiManager = new MemoryApiManager();
 
