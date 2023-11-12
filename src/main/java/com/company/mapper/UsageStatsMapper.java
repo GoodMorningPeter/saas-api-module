@@ -7,5 +7,5 @@ import java.util.List;
 @Mapper
 public interface UsageStatsMapper {
     List<UsageStats> findAll();
-    void updateStats(UsageStats usageStats);
+    boolean updateStats(UsageStats usageStats);
 }

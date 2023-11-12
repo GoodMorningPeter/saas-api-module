@@ -15,4 +15,8 @@ public class UsageStatsService {
         List<UsageStats> all = usageStatsMapper.findAll();
         return all;
     }
+    public boolean updateStats(UsageStats usageStats){
+        boolean result = usageStatsMapper.updateStats(usageStats);
+        return result;
+    }
 }

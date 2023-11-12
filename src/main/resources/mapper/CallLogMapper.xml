@@ -13,7 +13,7 @@
             keyColumn=""
             useGeneratedKeys="true"
             timeout="20">
-        insert into api_call_log (id, api_id, caller, call_time, duration, error_message)
-        values (#{id}, #{api_id}, #{caller}, #{call_time}, #{duration}, #{error_message})
+        insert into api_call_log ( api_id, caller, call_time, duration, error_message)
+        values ( #{api_id}, #{caller}, #{call_time}, #{duration}, #{error_message})
     </insert>
 </mapper>

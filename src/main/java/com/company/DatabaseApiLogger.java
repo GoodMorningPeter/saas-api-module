@@ -1,8 +1,8 @@
 package com.company;
 import com.company.entity.CallLog;
 import com.company.entity.UsageStats;
-import com.company.mapper.CallLogMapper;
-import com.company.mapper.UsageStatsMapper;
+import com.company.service.CallLogService;
+import com.company.service.UsageStatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +11,18 @@ import java.text.SimpleDateFormat;
 
 @Service
 public class DatabaseApiLogger implements ApiLogger {
-    private Connection connection;
-
     @Autowired
-    private CallLogMapper callLogMapper;
-    private UsageStatsMapper usageStatsMapper;
+    private CallLogService callLogService;
+    @Autowired
+    private UsageStatsService usageStatsService;
 
-    public DatabaseApiLogger(){// (Connection connection) {
-//        this.connection = connection;
+    public DatabaseApiLogger(){
     }
 
     public void logApiCall(ApiRequest apiRequest, ApiResponse apiResponse, long duration) {
         String call_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format( apiRequest.getTimestamp() );
-        CallLog calllog = new CallLog(null, "database", apiRequest.getApiUser().getUsername(), call_time, String.valueOf(duration), apiResponse.getError().getMessage());
-        callLogMapper.insertLog(calllog);
+        CallLog calllog = new CallLog(null, apiRequest.getApi().getApiDescription(), apiRequest.getApiUser().getUsername(), call_time, String.valueOf(duration), apiResponse.getError().getMessage());
+        callLogService.insertLog(calllog);
 
 //        String sql = "INSERT INTO api_call_log (api_id, caller, call_time, duration, error_message) VALUES (?, ?, ?, ?, ?)";
 //        try {
@@ -45,8 +43,9 @@ public class DatabaseApiLogger implements ApiLogger {
     }
 
     public void updateApiUsageStats(Integer apiId) {
-        UsageStats usageStats = new UsageStats(null, "database", null);
-        usageStatsMapper.updateStats(usageStats);
+        UsageStats usageStats = new UsageStats(null, apiId, null);
+        usageStatsService.updateStats(usageStats);
+
 //        String sql = "INSERT INTO api_usage_stats (api_id, call_count) VALUES (?, 1) ON DUPLICATE KEY UPDATE call_count = call_count + 1";
 //        try {
 //            PreparedStatement statement = connection.prepareStatement(sql);
