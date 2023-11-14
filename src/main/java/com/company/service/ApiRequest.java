@@ -1,6 +1,7 @@
-package com.company;
+package com.company.service;
 
 import com.company.entity.Api;
+import com.company.entity.ApiUser;
 
 import java.sql.Timestamp;
 

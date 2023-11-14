@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.service.ApiRequest;
+import com.company.service.ApiResponse;
+
 public class ConsoleApiErrorHandler implements ApiErrorHandler {
     public void handleApiError(ApiError apiError) {
         System.err.println("API error: " + apiError.getMessage());

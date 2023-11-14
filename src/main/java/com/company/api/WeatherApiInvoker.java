@@ -1,6 +1,9 @@
-package com.company;
+package com.company.api;
 
+import com.company.ApiError;
 import com.company.entity.Api;
+import com.company.entity.ApiUser;
+import com.company.service.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

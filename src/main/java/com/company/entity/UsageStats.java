@@ -2,8 +2,18 @@ package com.company.entity;
 
 public class UsageStats {
     private Integer id;
-    private Integer api_id;
+    private String description;
     private String call_count;
+
+
+    public UsageStats(Integer id, String description, String call_count) {
+        this.id = id;
+        this.description = description;
+        this.call_count = call_count;
+    }
+
+    public UsageStats() {
+    }
 
     public Integer getId() {
         return id;
@@ -13,12 +23,12 @@ public class UsageStats {
         this.id = id;
     }
 
-    public Integer getApi_id() {
-        return api_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setApi_id(Integer api_id) {
-        this.api_id = api_id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCall_count() {
@@ -26,12 +36,6 @@ public class UsageStats {
     }
 
     public void setCall_count(String call_count) {
-        this.call_count = call_count;
-    }
-
-    public UsageStats(Integer id, Integer api_id, String call_count) {
-        this.id = id;
-        this.api_id = api_id;
         this.call_count = call_count;
     }
 }

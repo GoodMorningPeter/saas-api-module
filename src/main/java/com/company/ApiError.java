@@ -7,6 +7,15 @@ public class ApiError {
     private String details;
     private LocalDateTime timestamp;
 
+    public ApiError(String message, String details, LocalDateTime timestamp) {
+        this.message = message;
+        this.details = details;
+        this.timestamp = timestamp;
+    }
+
+    public ApiError() {
+    }
+
     public String getMessage() {
         return message;
     }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface UsageStatsMapper {
     List<UsageStats> findAll();
     boolean updateStats(UsageStats usageStats);
+    int insertStats(UsageStats usageStats);
 }

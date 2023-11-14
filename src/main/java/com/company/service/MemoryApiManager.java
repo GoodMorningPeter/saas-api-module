@@ -1,10 +1,11 @@
-package com.company;
+package com.company.service;
 
 import com.company.entity.Api;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class MemoryApiManager implements ApiManager {
     private Map<Integer, Api> apiMap = new HashMap<>();
 

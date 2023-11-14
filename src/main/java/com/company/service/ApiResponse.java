@@ -1,4 +1,6 @@
-package com.company;
+package com.company.service;
+
+import com.company.ApiError;
 
 public class ApiResponse {
     private Integer id;  //Api的id
