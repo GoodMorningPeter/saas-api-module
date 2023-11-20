@@ -10,6 +10,7 @@ import com.company.service.MemoryApiManager;
 import com.company.entity.Api;
 import com.company.service.ApiInvoker;
 import com.company.api.WeatherApiInvoker;
+import com.company.api.LocationApiInvoker;
 import com.company.service.ApiRequest;
 import com.company.service.ApiResponse;
 import com.company.entity.ApiUser;
@@ -75,6 +76,16 @@ public class TestApplication {
         apiManager.registerApi(weatherApi);
         // Invoke WeatherAPi and get Response
         ApiInvoker weatherApiInvoker = new WeatherApiInvoker(apiManager);
+
+        // Register LocationApi
+        Api locationApi = app.ApiSetUp(++totalApiCount, "https://restapi.amap.com/v3/geocode/geo?address=北京市&key=1137f7d2f7a524537f4bd8f10c87ac2d", "location");
+        apiManager.registerApi(locationApi);
+        // Invoke LocationApi and get Response
+        ApiInvoker locationApiInvoker = new LocationApiInvoker(apiManager);
+        // ApiRequest apiRequest_loc = new ApiRequest();
+        // apiRequest_loc.setServiceCode("location");
+        // ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
+        // System.out.println(apiResponse_loc.getResponseBody());
 
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
