@@ -10,7 +10,9 @@ import com.company.service.MemoryApiManager;
 import com.company.entity.Api;
 import com.company.service.ApiInvoker;
 import com.company.api.WeatherApiInvoker;
+import com.company.api.BirthdayApiInvoker;
 import com.company.api.LocationApiInvoker;
+import com.company.api.TodayAnalysisInvoker;
 import com.company.service.ApiRequest;
 import com.company.service.ApiResponse;
 import com.company.entity.ApiUser;
@@ -82,10 +84,20 @@ public class TestApplication {
         apiManager.registerApi(locationApi);
         // Invoke LocationApi and get Response
         ApiInvoker locationApiInvoker = new LocationApiInvoker(apiManager);
-        // ApiRequest apiRequest_loc = new ApiRequest();
-        // apiRequest_loc.setServiceCode("location");
-        // ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
-        // System.out.println(apiResponse_loc.getResponseBody());
+        
+        // Register TodayApi
+        Api todayApi = app.ApiSetUp(++totalApiCount, "http://apis.juhe.cn/fapig/calendar/day?date=2023-10-01&detail=1&key=baaaa4a6ebd7f03d1c95541b3720a906", "today");
+        apiManager.registerApi(todayApi);
+        // Invoke TodayApi and get Response
+        ApiInvoker todayApiInvoker = new TodayAnalysisInvoker(apiManager);
+        
+
+        // Register BirthdayApi
+        Api birthdayApi = app.ApiSetUp(++totalApiCount, "http://v.juhe.cn/calendar/day?date=2002-2-11&key=9b5336bc498abd9b62542fbfb0eca843", "birthday");
+        apiManager.registerApi(birthdayApi);
+        // Invoke BirthdayApi and get Response
+        ApiInvoker birthdayApiInvoker = new BirthdayApiInvoker(apiManager);
+        
 
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
@@ -96,10 +108,33 @@ public class TestApplication {
         apiRequest.setTimestamp(timestamp);
         apiRequest.setStatus(0);
 
+        ApiRequest apiRequest_loc = new ApiRequest();
+        apiRequest.setApi(locationApi);
+        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest.setTimestamp(timestamp);
+        apiRequest.setStatus(0);
+
+        ApiRequest apiRequest_today = new ApiRequest();
+        apiRequest.setApi(todayApi);
+        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest.setTimestamp(timestamp);
+        apiRequest.setStatus(0);
+
+        ApiRequest apiRequest_birth = new ApiRequest();
+        apiRequest.setApi(birthdayApi);
+        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest.setTimestamp(timestamp);
+        apiRequest.setStatus(0);
+
         ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest, logger);
-        ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest, logger);
+        ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
+        ApiResponse apiResponse_today = todayApiInvoker.invokeApi(apiRequest_today, logger);
+        ApiResponse apiResponse_birth = birthdayApiInvoker.invokeApi(apiRequest_birth, logger);
         System.out.println(apiResponse.getResponseBody());
         System.out.println(apiResponse_loc.getResponseBody());
+        System.out.println(apiResponse_today.getResponseBody());
+        System.out.println(apiResponse_birth.getResponseBody());
+        
 
         // Register LocationApi
     }
