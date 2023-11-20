@@ -97,7 +97,9 @@ public class TestApplication {
         apiRequest.setStatus(0);
 
         ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest, logger);
+        ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest, logger);
         System.out.println(apiResponse.getResponseBody());
+        System.out.println(apiResponse_loc.getResponseBody());
 
         // Register LocationApi
     }
