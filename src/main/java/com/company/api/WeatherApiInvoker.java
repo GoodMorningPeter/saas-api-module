@@ -6,6 +6,7 @@ import com.company.entity.ApiUser;
 import com.company.service.*;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class WeatherApiInvoker implements ApiInvoker {
         return true;
     }
 
-    public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) {
+    public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) throws IOException {
         long start = System.currentTimeMillis();
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
@@ -50,11 +51,12 @@ public class WeatherApiInvoker implements ApiInvoker {
             isReader.close();
             apiResponse.setResponseBody(response.toString());
         } catch (Exception exp) {
-            ApiError error = new ApiError();
-            error.setMessage(exp.getMessage());
-            error.setDetails(exp.toString());
-            error.setTimestamp(LocalDateTime.now());
-            apiResponse.setError(error);
+            throw exp;
+//            ApiError error = new ApiError();
+//            error.setMessage(exp.getMessage());
+//            error.setDetails(exp.toString());
+//            error.setTimestamp(LocalDateTime.now());
+//            apiResponse.setError(error);
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);
