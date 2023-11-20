@@ -109,22 +109,22 @@ public class TestApplication {
         apiRequest.setStatus(0);
 
         ApiRequest apiRequest_loc = new ApiRequest();
-        apiRequest.setApi(locationApi);
-        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
-        apiRequest.setTimestamp(timestamp);
-        apiRequest.setStatus(0);
+        apiRequest_loc.setApi(locationApi);
+        apiRequest_loc.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_loc.setTimestamp(timestamp);
+        apiRequest_loc.setStatus(0);
 
         ApiRequest apiRequest_today = new ApiRequest();
-        apiRequest.setApi(todayApi);
-        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
-        apiRequest.setTimestamp(timestamp);
-        apiRequest.setStatus(0);
+        apiRequest_today.setApi(todayApi);
+        apiRequest_today.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_today.setTimestamp(timestamp);
+        apiRequest_today.setStatus(0);
 
         ApiRequest apiRequest_birth = new ApiRequest();
-        apiRequest.setApi(birthdayApi);
-        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
-        apiRequest.setTimestamp(timestamp);
-        apiRequest.setStatus(0);
+        apiRequest_birth.setApi(birthdayApi);
+        apiRequest_birth.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_birth.setTimestamp(timestamp);
+        apiRequest_birth.setStatus(0);
 
         ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest, logger);
         ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
@@ -136,6 +136,5 @@ public class TestApplication {
         System.out.println(apiResponse_birth.getResponseBody());
         
 
-        // Register LocationApi
     }
 }
