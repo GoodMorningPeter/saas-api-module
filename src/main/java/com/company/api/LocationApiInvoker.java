@@ -42,15 +42,25 @@ public class LocationApiInvoker implements ApiInvoker{
             String str;
             StringBuilder response = new StringBuilder();
             String location="";
+            String country = "";
+            String city = "";
+            String adcode = "";
             while((str = br.readLine()) != null){
                 JSONObject obj = JSONObject.parseObject(str);
                 if(String.valueOf(obj.get("status")).equals(SUCCESS_FLAG)){
                     JSONObject jobJSON = JSONObject.parseObject(obj.get("geocodes").toString().substring(1, obj.get("geocodes").toString().length() - 1));
                     location = String.valueOf(jobJSON.get("location"));
+                    country = String.valueOf(jobJSON.get("country"));
+                    city = String.valueOf(jobJSON.get("city"));
+                    adcode = String.valueOf(jobJSON.get("adcode"));
                 }else{
                     throw new RuntimeException("地址转换经纬度失败，错误码：" + obj.get("infocode"));
                 }
+
                 response.append("经纬度：" + location + "\n");
+                response.append("国家：" + country + "\n");
+                response.append("城市：" + city + "\n");
+                response.append("邮编：" + adcode + "\n");
             }
             br.close();
             isReader.close();
