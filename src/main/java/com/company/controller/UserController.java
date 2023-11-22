@@ -1,9 +1,6 @@
 package com.company.controller;
 
-import com.company.api.BirthdayApiInvoker;
-import com.company.api.LocationApiInvoker;
-import com.company.api.TodayAnalysisInvoker;
-import com.company.api.WeatherApiInvoker;
+import com.company.api.*;
 import com.company.entity.Api;
 import com.company.entity.ApiUser;
 import com.company.entity.CallLog;
@@ -62,6 +59,9 @@ public class UserController {
     @PostMapping("/apiAdd")
     public String addApi(@RequestBody Api api) {
         int result = apiService.addApi(api);
+        if(result == 1){
+            apiManager.registerApi(api);
+        }
         return result == 1 ? "API added successfully" : "Error adding API";
     }
 
@@ -117,7 +117,7 @@ public class UserController {
 
 
     private ApiInvoker selectApiInvoker(Api api) {
-        switch(api.getApiDescription()) {
+        switch (api.getApiDescription()) {
             case "weather":
                 return new WeatherApiInvoker(apiManager);
             case "location":
@@ -128,8 +128,10 @@ public class UserController {
                 return new BirthdayApiInvoker(apiManager);
 
             // Add more cases as needed
+
             default:
-                throw new IllegalArgumentException("Unknown API type: " + api.getApiDescription());
+                // Use GenericApiInvoker for unknown API types
+                return new GenericApiInvoker(apiManager);
         }
     }
 }
