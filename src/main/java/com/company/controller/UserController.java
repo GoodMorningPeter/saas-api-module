@@ -77,34 +77,6 @@ public class UserController {
         return result == 1 ? "API deleted successfully" : "Error deleting API";
     }
 
-//    @ResponseBody
-//    @PostMapping("/apiCall")
-//    public ResponseEntity<String> callApi(@RequestBody Map<String, String> body) throws IOException, InterruptedException {
-//        System.out.println(body);
-//        String apiDescription = body.get("description");
-////        System.out.println(apiDescription);
-////        System.out.println("---");
-////        for (Api api : apiManager.apiMap.values()) {
-////            // Now you can use api
-////            System.out.println("API Description: " + api.getApiDescription());
-////            System.out.println("API Id: " + api.getId());
-////        }
-////        System.out.println("---");
-//        Api api = apiManager.apiMap.get(apiDescription);
-//        ApiInvoker apiInvoker = selectApiInvoker(api);
-//        // Create and populate the ApiRequest
-//        ApiRequest apiRequest = new ApiRequest();
-//        apiRequest.setApi(api);
-//        apiRequest.setApiUser(new ApiUser("Tom", "123456")); // Replace with actual user
-//        apiRequest.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-//        apiRequest.setStatus(0);
-//        // Invoke the API and return the response
-//        System.out.println("hahaha");
-//        ApiResponse apiResponse = apiInvoker.invokeApi(apiRequest, databaseApiLogger);
-//        System.out.println(apiResponse.getResponseBody());
-//        return ResponseEntity.ok(apiResponse.getResponseBody());
-//    }
-
     @ResponseBody
     @PostMapping("/apiCall")
     public ResponseEntity<Map<String, String>> callApi(@RequestBody Map<String, String> body) {
