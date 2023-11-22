@@ -7,21 +7,21 @@ import java.util.HashMap;
 import java.util.Map;
 @Service
 public class MemoryApiManager implements ApiManager {
-    private Map<Integer, Api> apiMap = new HashMap<>();
+    public Map<String, Api> apiMap = new HashMap<>();
 
     public void registerApi(Api api) {
-        apiMap.put(api.getId(), api);
+        apiMap.put(api.getApiDescription(), api);
     }
 
-    public void updateApi(Integer apiId, Api api) {
-        apiMap.put(apiId, api);
+    public void updateApi(Api api) {
+        apiMap.put(api.getApiDescription(), api);
     }
 
-    public void deleteApi(Integer apiId) {
-        apiMap.remove(apiId);
+    public void deleteApi(String apiDescription) {
+        apiMap.remove(apiDescription);
     }
 
-    public Api getApi(Integer apiId) {
-        return apiMap.get(apiId);
+    public Api getApiByDescription(String apiDescription) {
+        return apiMap.get(apiDescription);
     }
 }

@@ -4,15 +4,19 @@ import com.company.ApiError;
 import com.company.entity.Api;
 import com.company.entity.ApiUser;
 import com.company.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDateTime;
-
+@Service
 public class WeatherApiInvoker implements ApiInvoker {
-    private ApiManager apiManager;
+//    @Autowired
+//    private ApiManager apiManager;
+    private final ApiManager apiManager;
 
     public WeatherApiInvoker(ApiManager apiManager) {
         this.apiManager = apiManager;
@@ -28,11 +32,14 @@ public class WeatherApiInvoker implements ApiInvoker {
     }
 
     public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) throws IOException {
+        System.out.println(apiRequest.getApi().getApiDescription());
+        System.out.println(apiRequest.getApi().getApiUrl());
+
         long start = System.currentTimeMillis();
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
         try{
-            Api apiDefinition = apiManager.getApi(apiRequest.getApi().getId());
+            Api apiDefinition = apiManager.getApiByDescription(apiRequest.getApi().getApiDescription());
             URL url = new URL(apiDefinition.getApiUrl());
             InputStreamReader isReader =  new InputStreamReader(url.openStream(),"UTF-8");
             BufferedReader br = new BufferedReader(isReader);

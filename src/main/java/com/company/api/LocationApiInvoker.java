@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LocationApiInvoker implements ApiInvoker{
-    private ApiManager apiManager;
+    private final ApiManager apiManager;
     private static String SUCCESS_FLAG="1";
 
     public LocationApiInvoker(ApiManager apiManager) {
@@ -35,7 +35,7 @@ public class LocationApiInvoker implements ApiInvoker{
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
         try{
-            Api apiDefinition = apiManager.getApi(apiRequest.getApi().getId());
+            Api apiDefinition = apiManager.getApiByDescription(apiRequest.getApi().getApiDescription());
             URL url = new URL(apiDefinition.getApiUrl());
             InputStreamReader isReader =  new InputStreamReader(url.openStream(),"UTF-8");
             BufferedReader br = new BufferedReader(isReader);

@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BirthdayApiInvoker implements ApiInvoker{
-    private ApiManager apiManager;
+    private final ApiManager apiManager;
 
     public BirthdayApiInvoker(ApiManager apiManager) {
         this.apiManager = apiManager;
@@ -34,7 +34,7 @@ public class BirthdayApiInvoker implements ApiInvoker{
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
         try{
-            Api apiDefinition = apiManager.getApi(apiRequest.getApi().getId());
+            Api apiDefinition = apiManager.getApiByDescription(apiRequest.getApi().getApiDescription());
             URL url = new URL(apiDefinition.getApiUrl());
             InputStreamReader isReader =  new InputStreamReader(url.openStream(),"UTF-8");
             BufferedReader br = new BufferedReader(isReader);
