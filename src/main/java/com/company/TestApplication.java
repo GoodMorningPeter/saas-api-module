@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class TestApplication {
@@ -52,6 +53,10 @@ public class TestApplication {
         weatherApi.setId(id);
         weatherApi.setApiDescription(ApiDescription);
         weatherApi.setApiUrl(urlString);
+        weatherApi.setRequiredPermissions(Arrays.asList("1", "2", "3"));
+        if(ApiDescription.equals("today")){
+            weatherApi.setRequiredPermissions(Arrays.asList("1", "2", "3", "4"));
+        }
 
         // Insert new Api record
         apiMapper.addApi(weatherApi);
@@ -106,25 +111,25 @@ public class TestApplication {
 
         ApiRequest apiRequest = new ApiRequest();
         apiRequest.setApi(weatherApi);
-        apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
         apiRequest.setTimestamp(timestamp);
         apiRequest.setStatus(0);
 
         ApiRequest apiRequest_loc = new ApiRequest();
         apiRequest_loc.setApi(locationApi);
-        apiRequest_loc.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_loc.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
         apiRequest_loc.setTimestamp(timestamp);
         apiRequest_loc.setStatus(0);
 
         ApiRequest apiRequest_today = new ApiRequest();
         apiRequest_today.setApi(todayApi);
-        apiRequest_today.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_today.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
         apiRequest_today.setTimestamp(timestamp);
         apiRequest_today.setStatus(0);
 
         ApiRequest apiRequest_birth = new ApiRequest();
         apiRequest_birth.setApi(birthdayApi);
-        apiRequest_birth.setApiUser(new ApiUser("Tom", "123456"));
+        apiRequest_birth.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
         apiRequest_birth.setTimestamp(timestamp);
         apiRequest_birth.setStatus(0);
 

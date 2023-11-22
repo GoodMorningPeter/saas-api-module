@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -60,6 +61,7 @@ public class UserController {
     public String addApi(@RequestBody Api api) {
         int result = apiService.addApi(api);
         if(result == 1){
+            api.setRequiredPermissions(Arrays.asList("1", "2", "3"));
             apiManager.registerApi(api);
         }
         return result == 1 ? "API added successfully" : "Error adding API";
@@ -95,7 +97,7 @@ public class UserController {
             ApiInvoker apiInvoker = selectApiInvoker(api);
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.setApi(api);
-            apiRequest.setApiUser(new ApiUser("Tom", "123456"));
+            apiRequest.setApiUser(new ApiUser("Tom", "123456",Arrays.asList("1", "2", "3")));
             apiRequest.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
             apiRequest.setStatus(0);
 

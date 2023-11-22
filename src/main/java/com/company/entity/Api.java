@@ -1,11 +1,14 @@
 package com.company.entity;
 
+import java.util.List;
+
 public class Api {
     private Integer id;
     private String ApiDescription;
     private String ApiUrl;
     private String appUser;
     private String appKey;
+    private List<String> requiredPermissions;
 
     public Api(Integer id, String apiDescription, String apiUrl, String appUser, String appKey) {
         this.id = id;
@@ -58,6 +61,13 @@ public class Api {
         this.appKey = appKey;
     }
 
+    public List<String> getRequiredPermissions() {
+        return requiredPermissions;
+    }
+
+    public void setRequiredPermissions(List<String> requiredPermissions) {
+        this.requiredPermissions = requiredPermissions;
+    }
 
     // getters and setters
     // ...

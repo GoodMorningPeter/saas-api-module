@@ -15,6 +15,10 @@ public class ApiResponse {
         this.error = error;
     }
 
+    public ApiResponse(String responseBody) {;
+        this.responseBody = responseBody;
+    }
+
     public ApiResponse() {
     }
 
