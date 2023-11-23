@@ -5,6 +5,7 @@ import com.company.entity.ApiUser;
 import com.company.service.*;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class TodayAnalysisInvoker implements ApiInvoker{
     private final ApiManager apiManager;
     private static String SUCCESS_FLAG="1";
