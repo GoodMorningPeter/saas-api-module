@@ -15,4 +15,8 @@
         set call_count = call_count + 1
         where id = #{id}
     </update>
+
+    <select id="findByDescription" resultType="com.company.entity.UsageStats">
+        SELECT * FROM api_usage_stats WHERE description=#{description}
+    </select>
 </mapper>

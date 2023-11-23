@@ -35,7 +35,19 @@ public class UserController {
     @Autowired
     private MemoryApiManager apiManager;
 
+    @GetMapping("/apiLogByDesc")
+    public List<CallLog> getApiLogByDesc(String description){
+        List<CallLog> all = callLogService.findAll();
+        List<CallLog> collect = all.stream().filter(log -> log.getDescription().equals(description)).collect(Collectors.toList());
+        return collect;
+    }
 
+    @GetMapping("/apiStatsByDesc")
+    public List<UsageStats> getApiStatsByDesc(String description){
+        List<UsageStats> all = usageStatsService.findAll();
+        List<UsageStats> collect = all.stream().filter(stats -> stats.getDescription().equals(description)).collect(Collectors.toList());
+        return collect;
+    }
     @GetMapping("/apiInfo")
     public List<UsageStats> getApiInfo(Integer id){
         List<UsageStats> all = usageStatsService.findAll();
