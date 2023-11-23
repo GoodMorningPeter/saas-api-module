@@ -16,4 +16,8 @@
         insert into api_call_log ( description, caller, call_time, duration, error_message)
         values ( #{description}, #{caller}, #{call_time}, #{duration}, #{error_message})
     </insert>
+
+    <select id="findByDescription" resultType="com.company.entity.CallLog">
+        SELECT * FROM api_call_log WHERE description=#{description}
+    </select>
 </mapper>
