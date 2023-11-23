@@ -83,24 +83,24 @@ public class TestApplication {
         TestApplication app = context.getBean(TestApplication.class);
 
         // Register WeatherApi
-        Api weatherApi = app.ApiSetUp(++totalApiCount,"http://t.weather.itboy.net/api/weather/city/101250601", "weather");
+        Api weatherApi = app.ApiSetUp(++totalApiCount,"http://t.weather.itboy.net/api/weather/city/101250601", "weather6");
         app.apiManager.registerApi(weatherApi);
 
         // Register LocationApi
-        Api locationApi = app.ApiSetUp(++totalApiCount, "https://restapi.amap.com/v3/geocode/geo?address=北京市&key=1137f7d2f7a524537f4bd8f10c87ac2d", "location");
+        Api locationApi = app.ApiSetUp(++totalApiCount, "https://restapi.amap.com/v3/geocode/geo?address=北京市&key=1137f7d2f7a524537f4bd8f10c87ac2d", "location6");
         app.apiManager.registerApi(locationApi);
         // Invoke LocationApi and get Response
         ApiInvoker locationApiInvoker = new LocationApiInvoker(app.apiManager);
 
         // Register TodayApi
-        Api todayApi = app.ApiSetUp(++totalApiCount, "http://apis.juhe.cn/fapig/calendar/day?date=2023-10-01&detail=1&key=baaaa4a6ebd7f03d1c95541b3720a906", "today");
+        Api todayApi = app.ApiSetUp(++totalApiCount, "http://apis.juhe.cn/fapig/calendar/day?date=2023-10-01&detail=1&key=baaaa4a6ebd7f03d1c95541b3720a906", "today6");
         app.apiManager.registerApi(todayApi);
         // Invoke TodayApi and get Response
         ApiInvoker todayApiInvoker = new TodayAnalysisInvoker(app.apiManager);
 
 
         // Register BirthdayApi
-        Api birthdayApi = app.ApiSetUp(++totalApiCount, "http://v.juhe.cn/calendar/day?date=2002-2-11&key=9b5336bc498abd9b62542fbfb0eca843", "birthday");
+        Api birthdayApi = app.ApiSetUp(++totalApiCount, "http://v.juhe.cn/calendar/day?date=2002-2-11&key=9b5336bc498abd9b62542fbfb0eca843", "birthday6");
         app.apiManager.registerApi(birthdayApi);
         // Invoke BirthdayApi and get Response
         ApiInvoker birthdayApiInvoker = new BirthdayApiInvoker(app.apiManager);

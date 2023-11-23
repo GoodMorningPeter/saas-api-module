@@ -7,6 +7,7 @@ import com.company.service.*;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public class TodayAnalysisInvoker implements ApiInvoker{
 
     }
 
-    public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) {
+    public ApiResponse invokeApi(ApiRequest apiRequest, ApiLogger logger) throws IOException {
         if (!validateUser(apiRequest)) {
             // 如果用户没有权限，返回一个表示权限错误的ApiResponse
             return new ApiResponse("403");
@@ -94,6 +95,7 @@ public class TodayAnalysisInvoker implements ApiInvoker{
             error.setDetails(exp.toString());
             error.setTimestamp(LocalDateTime.now());
             apiResponse.setError(error);
+            apiResponse.setResponseBody("404");
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);

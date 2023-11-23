@@ -92,6 +92,7 @@ public class LocationApiInvoker implements ApiInvoker{
             error.setDetails(exp.toString());
             error.setTimestamp(LocalDateTime.now());
             apiResponse.setError(error);
+            apiResponse.setResponseBody("404");
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);

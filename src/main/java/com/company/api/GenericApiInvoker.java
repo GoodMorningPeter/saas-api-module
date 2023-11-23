@@ -1,5 +1,6 @@
 package com.company.api;
 
+import com.company.ApiError;
 import com.company.entity.Api;
 import com.company.entity.ApiUser;
 import com.company.service.*;
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -69,7 +71,13 @@ public class GenericApiInvoker implements ApiInvoker {
                 apiResponse.setResponseBody(response.toString());
             }
         } catch (Exception exp) {
-            throw exp;
+//            throw exp;
+            ApiError error = new ApiError();
+            error.setMessage(exp.getMessage());
+            error.setDetails(exp.toString());
+            error.setTimestamp(LocalDateTime.now());
+            apiResponse.setError(error);
+            apiResponse.setResponseBody("404");
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);

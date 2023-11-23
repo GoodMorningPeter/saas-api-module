@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,32 +57,33 @@ public class WeatherApiInvoker implements ApiInvoker {
         long start = System.currentTimeMillis();
         ApiResponse apiResponse = new ApiResponse();
         String errorMessage = null;
-        try{
+        try {
             Api apiDefinition = apiManager.getApiByDescription(apiRequest.getApi().getApiDescription());
             URL url = new URL(apiDefinition.getApiUrl());
-            InputStreamReader isReader =  new InputStreamReader(url.openStream(),"UTF-8");
+            InputStreamReader isReader = new InputStreamReader(url.openStream(), "UTF-8");
             BufferedReader br = new BufferedReader(isReader);
             String str;
             StringBuilder response = new StringBuilder();
-            while((str = br.readLine()) != null){
-                String regex="\\p{Punct}+";
-                String digit[]=str.split(regex);
-                response.append("城市:"+digit[22]+digit[18]+"\n");
-                response.append("时间:"+digit[49]+"年"+digit[50]+"月"+digit[51]+"日"+digit[53]+"\n");
-                response.append("温度:"+digit[47]+"~"+digit[45]+"\n");
-                response.append("天气:"+digit[67]+" "+digit[63]+digit[65]+"\n");
-                response.append(digit[69]+"\n");
+            while ((str = br.readLine()) != null) {
+                String regex = "\\p{Punct}+";
+                String digit[] = str.split(regex);
+                response.append("城市:" + digit[22] + digit[18] + "\n");
+                response.append("时间:" + digit[49] + "年" + digit[50] + "月" + digit[51] + "日" + digit[53] + "\n");
+                response.append("温度:" + digit[47] + "~" + digit[45] + "\n");
+                response.append("天气:" + digit[67] + " " + digit[63] + digit[65] + "\n");
+                response.append(digit[69] + "\n");
             }
             br.close();
             isReader.close();
             apiResponse.setResponseBody(response.toString());
-        } catch (Exception exp) {
-            throw exp;
-//            ApiError error = new ApiError();
-//            error.setMessage(exp.getMessage());
-//            error.setDetails(exp.toString());
-//            error.setTimestamp(LocalDateTime.now());
-//            apiResponse.setError(error);
+        }catch (Exception exp) {
+//            throw exp;
+            ApiError error = new ApiError();
+            error.setMessage(exp.getMessage());
+            error.setDetails(exp.toString());
+            error.setTimestamp(LocalDateTime.now());
+            apiResponse.setError(error);
+            apiResponse.setResponseBody("404");
         } finally {
             long duration = System.currentTimeMillis() - start;
             logger.logApiCall(apiRequest, apiResponse, duration);
