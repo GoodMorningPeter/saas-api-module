@@ -64,14 +64,26 @@ public class WeatherApiInvoker implements ApiInvoker {
             BufferedReader br = new BufferedReader(isReader);
             String str;
             StringBuilder response = new StringBuilder();
-            while ((str = br.readLine()) != null) {
-                String regex = "\\p{Punct}+";
-                String digit[] = str.split(regex);
-                response.append("城市:" + digit[22] + digit[18] + "\n");
-                response.append("时间:" + digit[49] + "年" + digit[50] + "月" + digit[51] + "日" + digit[53] + "\n");
-                response.append("温度:" + digit[47] + "~" + digit[45] + "\n");
-                response.append("天气:" + digit[67] + " " + digit[63] + digit[65] + "\n");
-                response.append(digit[69] + "\n");
+            String weather = "";
+            String temperature = "";
+            String winddirection = "";
+            String windpower = "";
+            String humidity = "";
+            while((str = br.readLine()) != null){
+                JSONObject obj_all = JSONObject.parseObject(str);
+                String obj_a = obj_all.get("lives").toString();
+                JSONObject obj = JSONObject.parseObject(obj_a.substring(1, obj_a.length()-1));
+                weather = String.valueOf(obj.get("weather"));
+                temperature = String.valueOf(obj.get("temperature"));
+                winddirection = String.valueOf(obj.get("winddirection"));
+                windpower = String.valueOf(obj.get("windpower"));
+                humidity = String.valueOf(obj.get("humidity"));
+
+                response.append("天气：" + weather + "\n");
+                response.append("温度：" + temperature + "\n");
+                response.append("风向：" + winddirection + "\n");
+                response.append("风力：" + windpower + "\n");
+                response.append("湿度：" + humidity + "\n");
             }
             br.close();
             isReader.close();
