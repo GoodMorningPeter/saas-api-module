@@ -77,7 +77,7 @@ public class TestApplication {
         private String apiName;
         APIurlGenerator(String apiUrlspe, Map<String, String> parameters, String apiNamespe)
         {
-            apiUrl = ConsAPIurl(apiUrlspe, parameters);
+            apiUrl = ConstructAPIurl(apiUrlspe, parameters);
             apiName = apiNamespe;
             RegisterApi();
             return;
