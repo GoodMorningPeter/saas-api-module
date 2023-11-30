@@ -28,6 +28,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.net.URL;
+import java.util.Map;
 
 @SpringBootApplication
 public class TestApplication {
@@ -50,31 +52,32 @@ public class TestApplication {
     public static Integer totalApiCount = 0;
 
     public Api ApiSetUp(Integer id, String urlString, String ApiDescription){
-        Api weatherApi = new Api();
-        weatherApi.setId(id);
-        weatherApi.setApiDescription(ApiDescription);
-        weatherApi.setApiUrl(urlString);
-        weatherApi.setRequiredPermissions(Arrays.asList("1", "2", "3"));
+        Api exmpApi = new Api();
+        exmpApi.setId(id);
+        exmpApi.setApiDescription(ApiDescription);
+        exmpApi.setApiUrl(urlString);
+        exmpApi.setRequiredPermissions(Arrays.asList("1", "2", "3"));
         if(ApiDescription.equals("today")){
-            weatherApi.setRequiredPermissions(Arrays.asList("1", "2", "3", "4"));
+            exmpApi.setRequiredPermissions(Arrays.asList("1", "2", "3", "4"));
         }
 
         // Insert new Api record
-        apiMapper.addApi(weatherApi);
+        apiMapper.addApi(exmpApi);
 
         // Create new UsageStats
         UsageStats newStats = new UsageStats();
-        newStats.setDescription(weatherApi.getApiDescription());
+        newStats.setDescription(exmpApi.getApiDescription());
         newStats.setCall_count("0");
 
         // Insert new UsageStats record
         usageStatsMapper.insertStats(newStats);
 
-        return weatherApi;
+        return exmpApi;
     }
     static public class APIurlGenerator {
         private String apiUrl;
         private String apiName;
+        public Api expApi;
         APIurlGenerator(String apiUrlspe, Map<String, String> parameters, String apiNamespe)
         {
             apiUrl = ConstructAPIurl(apiUrlspe, parameters);
@@ -104,9 +107,12 @@ public class TestApplication {
             }
         }
         private void RegisterApi(){
-            Api expApi = app.ApiSetUp(++totalApiCount, apiUrl, apiName);
+            expApi = app.ApiSetUp(++totalApiCount, apiUrl, apiName);
             app.apiManager.registerApi(expApi);
             return;
+        }
+        public Api getExpApi(){
+            return expApi;
         }
     }
 
@@ -147,6 +153,11 @@ public class TestApplication {
         APIurlGenerator locGen = new APIurlGenerator(locUrl, locParm, "location");
         APIurlGenerator weatherGen = new APIurlGenerator(weatherUrl, weatherParm, "weather");
 
+        Api weatherApi = weatherGen.getExpApi();
+        Api locationApi = locGen.getExpApi();
+        Api todayApi = todayGen.getExpApi();
+        Api birthdayApi = birthGen.getExpApi();
+
         // Invoke Api and get Response
         ApiInvoker locationApiInvoker = new LocationApiInvoker(app.apiManager);
         ApiInvoker todayApiInvoker = new TodayAnalysisInvoker(app.apiManager);
@@ -174,16 +185,17 @@ public class TestApplication {
 //        app.apiManager.registerApi(birthdayApi);
 //        // Invoke BirthdayApi and get Response
 //        ApiInvoker birthdayApiInvoker = new BirthdayApiInvoker(app.apiManager);
-        
+
+
 
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
 
-        ApiRequest apiRequest = new ApiRequest();
-        apiRequest.setApi(weatherApi);
-        apiRequest.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
-        apiRequest.setTimestamp(timestamp);
-        apiRequest.setStatus(0);
+        ApiRequest apiRequest_weather = new ApiRequest();
+        apiRequest_weather.setApi(weatherApi);
+        apiRequest_weather.setApiUser(new ApiUser("Tom", "123456", Arrays.asList("1", "2", "3")));
+        apiRequest_weather.setTimestamp(timestamp);
+        apiRequest_weather.setStatus(0);
 
         ApiRequest apiRequest_loc = new ApiRequest();
         apiRequest_loc.setApi(locationApi);
@@ -203,7 +215,7 @@ public class TestApplication {
         apiRequest_birth.setTimestamp(timestamp);
         apiRequest_birth.setStatus(0);
 
-        ApiResponse apiResponse = app.weatherApiInvoker.invokeApi(apiRequest, logger);
+        ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest_weather, logger);
         ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
         ApiResponse apiResponse_today = todayApiInvoker.invokeApi(apiRequest_today, logger);
         ApiResponse apiResponse_birth = birthdayApiInvoker.invokeApi(apiRequest_birth, logger);
@@ -211,7 +223,7 @@ public class TestApplication {
         System.out.println(apiResponse_loc.getResponseBody());
         System.out.println(apiResponse_today.getResponseBody());
         System.out.println(apiResponse_birth.getResponseBody());
-        
+
 
     }
 }
