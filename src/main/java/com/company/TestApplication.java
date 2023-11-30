@@ -57,9 +57,9 @@ public class TestApplication {
         exmpApi.setApiDescription(ApiDescription);
         exmpApi.setApiUrl(urlString);
         exmpApi.setRequiredPermissions(Arrays.asList("1", "2", "3"));
-        if(ApiDescription.equals("today")){
-            exmpApi.setRequiredPermissions(Arrays.asList("1", "2", "3", "4"));
-        }
+//        if(ApiDescription.equals("today")){
+//            exmpApi.setRequiredPermissions(Arrays.asList("1", "2", "3", "4"));
+//        }
 
         // Insert new Api record
         apiMapper.addApi(exmpApi);
@@ -215,11 +215,11 @@ public class TestApplication {
         apiRequest_birth.setTimestamp(timestamp);
         apiRequest_birth.setStatus(0);
 
-        ApiResponse apiResponse = weatherApiInvoker.invokeApi(apiRequest_weather, logger);
+        ApiResponse apiResponse_weather = weatherApiInvoker.invokeApi(apiRequest_weather, logger);
         ApiResponse apiResponse_loc = locationApiInvoker.invokeApi(apiRequest_loc, logger);
         ApiResponse apiResponse_today = todayApiInvoker.invokeApi(apiRequest_today, logger);
         ApiResponse apiResponse_birth = birthdayApiInvoker.invokeApi(apiRequest_birth, logger);
-        System.out.println(apiResponse.getResponseBody());
+        System.out.println(apiResponse_weather.getResponseBody());
         System.out.println(apiResponse_loc.getResponseBody());
         System.out.println(apiResponse_today.getResponseBody());
         System.out.println(apiResponse_birth.getResponseBody());
